@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
-    <link rel="stylesheet" href="login2.css">
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
     <h1>Welcome To Cu Admission Portal</h1>
    <p style="text-align:center;"> <img src="cu.png" width="200" 
-height="200"  class="bottom"><img></p>
+            height="220"  class="bottom"><img></p>
     <br>
     
     

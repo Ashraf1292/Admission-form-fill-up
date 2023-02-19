@@ -24,7 +24,7 @@ echo "<p><a href='logout2.php'>Log out</a></p>";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome</title>
-    <link rel="stylesheet" href="login2.css">
+    <link rel="stylesheet" href="style.css">
 
 </head>
 

@@ -1,3 +1,4 @@
+
 <?php
     // Start a session
     session_start();
@@ -38,7 +39,6 @@
         }
     }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,7 +47,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Form</title>
-    <link rel="stylesheet" href="login2.css">
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -73,7 +73,7 @@
             <input type="password" name="password" placeholder="Password">
             <br>
             <br>
-     <a href="#" onclick="redirectToSignUp2()">If you haven't signed in then, click here!</a>            
+     <a href="#" onclick="redirectToSignUp2()">If you haven't signed up then, click here!</a>            
             <br>
            <br>
             <!-- Submit button -->
