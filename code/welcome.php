@@ -10,11 +10,11 @@
     }
     if(isset($_SESSION['email'])) {
         $email = $_SESSION['email'];
-        $sql = "SELECT * FROM Student WHERE Student_Email='$email'";
+        $sql = "SELECT Name FROM LOGIN WHERE Email='$email'";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-                $student_name = $row['Student_Name'];
+                $name = $row['Name'];
             }
         }
     }
@@ -37,7 +37,7 @@
       
             <!-- Sign up link -->
             
-                  <p class="register">You have been successfully logged in <?php if(isset($student_name)) { echo $student_name; } ?>
+                  <p class="register">You have been successfully logged in <?php if(isset($name)) { echo $name; } ?>
                <a href="#" onclick="redirectToSignUp1()">Check Status!</a>
                <br>
                <a href="#" onclick="redirectToSignUp()">Fill-up Form!</a>

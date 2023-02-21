@@ -24,12 +24,13 @@
         $pass = $_POST['password'];
 
         // Query to check if the email and password match
-        $sql = "SELECT * FROM Student WHERE Student_Email='$email' AND Student_Password='$pass'";
+        $sql = "SELECT * FROM LOGIN WHERE Email='$email' AND Password='$pass'";
         $result = $conn->query($sql);
 
         // If the query returns a result, it means that the email and password match
         if ($result->num_rows > 0) {
             // Store the email in a session variable
+            session_start();
             $_SESSION['email'] = $email;
             // Redirect to the welcome page
             header("Location: welcome.php");

@@ -5,13 +5,9 @@ session_start();
 // Check if the user is logged in
 
 // Get the user's email from the session
-$email = $_SESSION['email'];
+$name = $_SESSION['name'];
 
 // Display a welcome message with the email
-if (!empty($email)) {
-    echo "Welcome, $email! You have been successfully signed in.";
-}
-
 // Provide a link to log out
 echo "<p><a href='logout2.php'>Log out</a></p>";
 ?>
@@ -29,12 +25,12 @@ echo "<p><a href='logout2.php'>Log out</a></p>";
 </head>
 
 <body>
-    <h1>Welcome new</h1>
+    <h1>Welcome</h1>
     
       
             <!-- Sign up link -->
             
-                  <p class="register">You have been successfully signed in, <?php if(isset($student_email)) { echo $student_email; } ?>
+                  <p class="register">You have been successfully signed up <?php if(isset($name)) { echo $name; } ?>
                
                <a href="#" onclick="redirectToSignUp1()">Now You Can Login!</a>
                <br>
