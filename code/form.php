@@ -18,24 +18,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $email = $_SESSION['email'];
   $student_name = $_POST["student_name"];
   $mobile = $_POST["mobile"];
-  $date = $_POST["date"];
   $subject = $_POST["subject"];
   $session = $_POST["session"];
+  
+  $query = "SELECT Account_ID FROM LOGIN WHERE Email = '$email'";
+  $result = mysqli_query($conn, $query);
+  $row = mysqli_fetch_assoc($result);
+  $account_id = $row['Account_ID'];
 
-  $sql = "UPDATE Student SET Student_Name = '$student_name' , Mobile = '$mobile', Date ='$date', Subject = '$subject', Session = '$session'WHERE Student_Email = '$email'";
+  $sql = "INSERT INTO `student` (`Student_ID`, `Student_Name`, `Student_Email`, `Session`, `Subject`, `Date`, `Mobile`, `Account_ID`) VALUES (NULL, '$student_name', '$email', '$session', '$subject', current_timestamp(), '$mobile', '$account_id');";
 
   if ($conn->query($sql) === TRUE) {
     echo "Student record created successfully<br>";
   } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
-  }
-  
-
-  $query = "SELECT Student_ID FROM Student WHERE Student_Email = '$email'";
-$result = mysqli_query($conn, $query);
-$row = mysqli_fetch_assoc($result);
-$student_id = $row['Student_ID'];
-
+  } 
+  $query = "SELECT Student_ID FROM STUDENT WHERE Student_Email = '$email'";
+  $result = mysqli_query($conn, $query);
+  $row = mysqli_fetch_assoc($result);
+  $student_id = $row['Student_ID'];
 
   $f_name = $_POST["f_name"];
   $f_mobile = $_POST["f_mobile"];

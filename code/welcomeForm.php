@@ -8,15 +8,8 @@
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    if(isset($_SESSION['email'])) {
-        $email = $_SESSION['email'];
-        $sql = "SELECT * FROM Student WHERE Student_Email='$email'";
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-                $student_name = $row['Student_Name'];
-            }
-        }
+    if(isset($_SESSION['name'])) {
+        $name = $_SESSION['name'];
     }
     ?>
 <!DOCTYPE html>
@@ -37,7 +30,7 @@
       
             <!-- Sign up link -->
             
-                  <p class="register">Your form have been successfully submitted, <?php if(isset($email)) { echo $email; } ?>
+                  <p class="register">Your form have been successfully submitted, <?php if(isset($name)) { echo $name; } ?>
                
                
                <br>

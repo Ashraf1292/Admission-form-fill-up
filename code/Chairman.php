@@ -29,7 +29,7 @@ $query = "SELECT Student.Student_ID, Student.Student_Name, Form.Form_ID FROM Stu
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome Chairman</title>
-    <link rel="stylesheet" href="login2.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="bg-dark">
