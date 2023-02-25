@@ -1,11 +1,32 @@
 <?php
 // Start a session
 session_start();
-
-// Check if the user is logged in
+ $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "database";
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
 
 // Get the user's email from the session
 $name = $_SESSION['name'];
+$candidate_id = $_SESSION['candidate_ID'];
+
+$query = "SELECT Payment_ID FROM Payment WHERE candidate_ID = '$candidate_id'";
+$result = mysqli_query($conn, $query);
+
+if(mysqli_num_rows($result) > 0){
+
+    echo "Payment Done";
+}  else {
+
+    echo "No Payment";
+}
+
+
+mysqli_close($conn);
 
 // Display a welcome message with the email
 // Provide a link to log out

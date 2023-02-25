@@ -18,6 +18,8 @@
             }
         }
     }
+	echo "<p><a href='logout2.php'>Log out</a></p>";
+
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,7 +54,7 @@
     window.location.href = "form.html";
   }
    function redirectToSignUp1() {
-    window.location.href = "status.html";
+    window.location.href = "status.php";
   }
 </script>
 

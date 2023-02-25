@@ -19,6 +19,9 @@
               WHERE Approval.P_Approval = 'YES'";
               
     $result = mysqli_query($conn, $query);
+	
+	  echo "<p><a href='logout.php'>Log out</a></p>";
+
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +57,7 @@
         while ($row = mysqli_fetch_assoc($result)) {
     ?>
     <tr>
-                                <td><?php echo $row['Student_ID']?></td>
+                                <td><a href='details.php?student_id=<?php echo $row['Student_ID']?>'><?php echo $row['Student_ID']?></a></td>
                                 <td><?php echo $row['Student_Name']?></td>
                                 <td><?php echo $row['Form_ID']?></td>
                                 <td>

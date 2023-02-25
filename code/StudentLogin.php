@@ -53,6 +53,13 @@
 </head>
 
 <body>
+  <a href="#" onclick="redirectToSignUp4()">Home Page</a>
+
+    <script>
+  function redirectToSignUp4() {
+    window.location.href = "HomePage.php";
+  }
+  </script>
     <h1>Log In</h1>
     <form action="" method="post">
         <!-- Headings for the form -->
@@ -86,6 +93,7 @@
     window.location.href = "signup.php";
   }
 </script>
+
 </body>
 
 </html>

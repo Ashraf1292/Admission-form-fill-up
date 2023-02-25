@@ -125,7 +125,31 @@ if ($conn->query($sql) === TRUE) {
   echo "Error: " . $sql . "<br>" . $conn->error;
 }
 
-// Redirect to Welcome4.php page after successful form submission
+if(isset($_POST['submit'])){
+  $imagename = $_FILES['image']['name'];
+  $tmpname   = $_FILES['image']['tmp_name'];
+  $uploc     ='images/'.$imagename;  
+
+  $sql = "INSERT INTO Documents(Document_ID, Student_Image, Student_ID) VALUES (NULL, 'imagename', '$student_id')";
+
+  if(mysqli_query($conn, $sql) == TRUE){
+    move_uploaded_file($tmpname, $uploc);
+    echo "Data Inserted";
+  }else{
+    echo "Data Not Inserted";
+  }
+
+
+
+
+
+  }
+
+
+}
+
+
+// Redirect to Welcome.php page after successful form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (!$conn->error) {
     header("Location: welcomeForm.php");
@@ -134,7 +158,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 
-}
+
 
 $conn->close();
 ?>

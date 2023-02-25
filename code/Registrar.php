@@ -19,6 +19,9 @@
               WHERE Approval.P_Approval = 'YES'";
               
     $result = mysqli_query($conn, $query);
+	
+	  echo "<p><a href='logout.php'>Log out</a></p>";
+
 ?>
 
 <!DOCTYPE html>
@@ -27,12 +30,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome Provost</title>
+    <title>Welcome Registrar</title>
     <link rel="stylesheet" href="login2.css">
 </head>
 
 <body class="bg-dark">
-    <h1>Welcome Provost <br> Student Data</h1>
+    <h1>Welcome Registrar <br> Student Data</h1>
     <div class="headContainer">
         <div class="row mt-5">
             <div class="col">
@@ -54,7 +57,7 @@
         while ($row = mysqli_fetch_assoc($result)) {
     ?>
     <tr>
-                                <td><?php echo $row['Student_ID']?></td>
+                                <td><a href='details.php?student_id=<?php echo $row['Student_ID']?>'><?php echo $row['Student_ID']?></a></td>
                                 <td><?php echo $row['Student_Name']?></td>
                                 <td><?php echo $row['Form_ID']?></td>
                                 <td>

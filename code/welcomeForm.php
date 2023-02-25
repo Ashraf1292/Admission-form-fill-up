@@ -11,6 +11,9 @@
     if(isset($_SESSION['name'])) {
         $name = $_SESSION['name'];
     }
+    echo "<p><a href='logout2.php'>Log out</a></p>";
+
+
     ?>
 <!DOCTYPE html>
 <html lang="en">

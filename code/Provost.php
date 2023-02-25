@@ -27,6 +27,9 @@
         EXISTS (SELECT * FROM Officials WHERE Officials.Officials_Role = 'Chairman' AND Officials.Hall = '$hall')";
         $result = mysqli_query($conn, $query);
     }
+	
+	  echo "<p><a href='logout.php'>Log out</a></p>";
+
 ?>
 
 
@@ -65,7 +68,7 @@
         while ($row = mysqli_fetch_assoc($result)) {
     ?>
     <tr>
-                                <td><?php echo $row['Student_ID']?></td>
+                                <td><a href='details.php?student_id=<?php echo $row['Student_ID']?>'><?php echo $row['Student_ID']?></a></td>
                                 <td><?php echo $row['Student_Name']?></td>
                                 <td><?php echo $row['Form_ID']?></td>
                                 <td>

@@ -19,7 +19,7 @@
     // Check if the form has been submitted
     if(isset($_POST['submit'])) {
         // Get the form data
-        $candidate_id = $_POST['candidate_ID'];
+        $candidate_id =$_SESSION['candidate_ID']= $_POST['candidate_ID'];
         $email = $_POST['email'];
         $pass = $_POST['password'];
         $cpass = $_POST['cpassword'];
@@ -105,6 +105,13 @@
             <button type="submit" name="submit" value="Sign In">Submit</button>
         </div>
     </form>
+	<p><center><a href="#" onclick="redirectToSignUp4()">Home Page</a></center></p>
+
+    <script>
+  function redirectToSignUp4() {
+    window.location.href = "HomePage.php";
+  }
+</script>
 </body>
 
 </html>
