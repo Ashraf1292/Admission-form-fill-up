@@ -196,7 +196,7 @@
     </div>
     <br>
     <br>
-    <a href="generate_pdf.php?student_id=<?php echo $student_id; ?>">Download PDF</a>
+    
 
 </body>
 </html>
