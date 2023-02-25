@@ -63,9 +63,10 @@
 
             // Display status based on form approval status
             if (!$row) {
-                echo "Your Form Has Not Been Submitted";
+                echo "Your Form Has Not Been Submitted  ";
+
             } elseif ($row['AAA_Approval'] == 'YES') {
-                echo "Congratulaions! Your Form Has Been Approved";
+               echo "Congratulaions! Your Form Has Been Approved. <a href='generate_pdf.php?student_id=" . $student_id . "' target='_blank'>Click here to download PDF</a>";
             } elseif ($row['C_Approval'] == 'NO' || $row['P_Approval'] == 'NO' || $row['R_Approval'] == 'NO' || $row['AR_Approval'] == 'NO' || $row['AAA_Approval'] == 'NO') {
                 echo "Your Form Has Been Disapproved";
             } else {
