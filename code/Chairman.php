@@ -71,7 +71,7 @@ $query = "SELECT Student.Student_ID, Student.Student_Name, Form.Form_ID FROM Stu
                                 <td>
                                     <form method="post">
                                         <input type="hidden" name="student_id" value="<?php echo $row['Student_ID']?>">
-                                        <input type="hidden" name="approval" value="NO">
+                                        <input type="hidden" name="disapproval" value="NO">
                                         <input type="submit" value="Disapprove" class="btn btn-danger">
                                     </form>
                                         </td>
@@ -103,7 +103,34 @@ if (isset($_POST['approval'])) {
     $form_id_result = mysqli_query($conn, $form_id_query);
     $form_id_row = mysqli_fetch_assoc($form_id_result);
     $form_id = $form_id_row['Form_ID'];
-    $insert_query = "INSERT INTO Approval (Form_ID, C_Approval) VALUES ('$form_id', '$approval')";
+	$officials_id_query = "SELECT Officials_ID FROM Officials WHERE Officials_Email = '$email'";
+	$officials_id_result = mysqli_query($conn, $officials_id_query);
+	$officials_id_row = mysqli_fetch_assoc($officials_id_result);
+	$officials_id = $officials_id_row['Officials_ID'];
+	$insert_query = "INSERT INTO Approval (Form_ID, C_Approval) VALUES ('$form_id', '$officials_id')";
+	
+	
+if (mysqli_query($conn, $insert_query)) {
+    echo "Record inserted successfully";
+} else {
+    echo "Error inserting record: " . mysqli_error($conn);
+}
+}
+
+if (isset($_POST['disapproval'])) {
+    $student_id = $_POST['student_id'];
+    $disapproval = $_POST['disapproval'];
+    $form_id_query = "SELECT Form_ID FROM Form WHERE Student_ID = '$student_id'";
+    $form_id_result = mysqli_query($conn, $form_id_query);
+    $form_id_row = mysqli_fetch_assoc($form_id_result);
+    $form_id = $form_id_row['Form_ID'];
+    $officials_id_query = "SELECT Officials_ID FROM Officials WHERE Officials_Email = '$email'";
+    $officials_id_result = mysqli_query($conn, $officials_id_query);
+    $officials_id_row = mysqli_fetch_assoc($officials_id_result);
+    $officials_id = $officials_id_row['Officials_ID'];
+    $insert_query = "INSERT INTO Approval (Form_ID, C_Approval) VALUES ('$form_id', '$disapproval')";
+    
+    
 if (mysqli_query($conn, $insert_query)) {
     echo "Record inserted successfully";
 } else {

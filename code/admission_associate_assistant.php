@@ -16,7 +16,7 @@
               FROM Student 
               INNER JOIN Form ON Student.Student_ID = Form.Student_ID 
               INNER JOIN Approval ON Form.Form_ID = Approval.Form_ID 
-              WHERE Approval.P_Approval = 'YES'";
+              WHERE Approval.AR_Approval IS NOT NULL AND Approval.AR_Approval != 'NO'";
               
     $result = mysqli_query($conn, $query);
 	
@@ -70,7 +70,7 @@
                                 <td>
                                     <form method="post">
                                         <input type="hidden" name="student_id" value="<?php echo $row['Student_ID']?>">
-                                        <input type="hidden" name="approval" value="NO">
+                                        <input type="hidden" name="disapproval" value="NO">
                                         <input type="submit" value="Disapprove" class="btn btn-danger">
                                     </form>
                                         </td>
@@ -102,7 +102,12 @@ if (isset($_POST['approval'])) {
     $form_id_result = mysqli_query($conn, $form_id_query);
     $form_id_row = mysqli_fetch_assoc($form_id_result);
     $form_id = $form_id_row['Form_ID'];
-   $update_query = "UPDATE Approval SET AAA_Approval = 'YES' WHERE Form_ID = {$form_id}";
+    $officials_id_query = "SELECT Officials_ID FROM Officials WHERE Officials_Email = '$email'";
+    $officials_id_result = mysqli_query($conn, $officials_id_query);
+    $officials_id_row = mysqli_fetch_assoc($officials_id_result);
+    $officials_id = $officials_id_row['Officials_ID'];
+   
+   $update_query = "UPDATE Approval SET AAA_Approval = '$officials_id' WHERE Form_ID = {$form_id}";
 
 if (mysqli_query($conn, $update_query)) {
     echo "Record inserted successfully";
@@ -111,6 +116,22 @@ if (mysqli_query($conn, $update_query)) {
 }
 }
 
+
+if (isset($_POST['disapproval'])) {
+    $student_id = $_POST['student_id'];
+    $disapproval = $_POST['disapproval'];
+    $form_id_query = "SELECT Form_ID FROM Form WHERE Student_ID = '$student_id'";
+    $form_id_result = mysqli_query($conn, $form_id_query);
+    $form_id_row = mysqli_fetch_assoc($form_id_result);
+    $form_id = $form_id_row['Form_ID'];
+   $update_query = "UPDATE Approval SET AAA_Approval = '$disapproval' WHERE Form_ID = {$form_id}";
+
+if (mysqli_query($conn, $update_query)) {
+    echo "Record inserted successfully";
+} else {
+    echo "Error inserting record: " . mysqli_error($conn);
+}
+}
 
     // Redirect to the same page to update the table
  
