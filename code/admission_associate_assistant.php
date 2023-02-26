@@ -16,7 +16,7 @@
               FROM Student 
               INNER JOIN Form ON Student.Student_ID = Form.Student_ID 
               INNER JOIN Approval ON Form.Form_ID = Approval.Form_ID 
-              WHERE Approval.AAA_Approval IS NOT NULL AND Approval.AAA_Approval != 'NO' AND Approval.AR_Approval IS NOT NULL AND Approval.AR_Approval != 'NO'";
+              WHERE Approval.AAA_Approval IS NULL AND Approval.AR_Approval IS NOT NULL AND Approval.AR_Approval != 'NO'";
               
 $result = mysqli_query($conn, $query);
 

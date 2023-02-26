@@ -24,9 +24,11 @@
           FROM Student 
           INNER JOIN Form ON Student.Student_ID = Form.Student_ID 
           INNER JOIN Approval ON Form.Form_ID = Approval.Form_ID 
-          WHERE Approval.C_Approval = 'YES' 
+          WHERE Approval.C_Approval IS NOT NULL 
+          AND Approval.C_Approval != 'NO' 
           AND Approval.P_Approval IS NULL 
           AND EXISTS (SELECT * FROM Officials WHERE Officials.Officials_Role = 'Chairman' AND Officials.Hall = '$hall')";
+
 $result = mysqli_query($conn, $query);
     }
 	
@@ -115,6 +117,10 @@ if (isset($_POST['approval'])) {
     $form_id_result = mysqli_query($conn, $form_id_query);
     $form_id_row = mysqli_fetch_assoc($form_id_result);
     $form_id = $form_id_row['Form_ID'];
+	$officials_id_query = "SELECT Officials_ID FROM Officials WHERE Officials_Email = '$email'";
+    $officials_id_result = mysqli_query($conn, $officials_id_query);
+    $officials_id_row = mysqli_fetch_assoc($officials_id_result);
+    $officials_id = $officials_id_row['Officials_ID'];
    $update_query = "UPDATE Approval SET P_Approval = '$officials_id' WHERE Form_ID = {$form_id}";
    
 
