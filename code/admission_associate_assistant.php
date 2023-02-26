@@ -16,9 +16,10 @@
               FROM Student 
               INNER JOIN Form ON Student.Student_ID = Form.Student_ID 
               INNER JOIN Approval ON Form.Form_ID = Approval.Form_ID 
-              WHERE Approval.AR_Approval IS NOT NULL AND Approval.AR_Approval != 'NO'";
+              WHERE Approval.AAA_Approval IS NOT NULL AND Approval.AAA_Approval != 'NO' AND Approval.AR_Approval IS NOT NULL AND Approval.AR_Approval != 'NO'";
               
-    $result = mysqli_query($conn, $query);
+$result = mysqli_query($conn, $query);
+
 	
 	  echo "<p><a href='logout.php'>Log out</a></p>";
 
@@ -111,6 +112,7 @@ if (isset($_POST['approval'])) {
 
 if (mysqli_query($conn, $update_query)) {
     echo "Record inserted successfully";
+	header('Location: ' . $_SERVER['PHP_SELF']);
 } else {
     echo "Error inserting record: " . mysqli_error($conn);
 }
@@ -128,6 +130,7 @@ if (isset($_POST['disapproval'])) {
 
 if (mysqli_query($conn, $update_query)) {
     echo "Record inserted successfully";
+	header('Location: ' . $_SERVER['PHP_SELF']);
 } else {
     echo "Error inserting record: " . mysqli_error($conn);
 }

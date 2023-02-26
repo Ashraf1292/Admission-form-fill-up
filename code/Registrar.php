@@ -12,13 +12,14 @@
     $email = $_SESSION['email'];
 
     // Get the student ID, name, and form ID from the Student and Form tables for the forms with 'YES' value in their P_Approval column
-    $query = "SELECT Student.Student_ID, Student.Student_Name, Form.Form_ID 
-              FROM Student 
-              INNER JOIN Form ON Student.Student_ID = Form.Student_ID 
-              INNER JOIN Approval ON Form.Form_ID = Approval.Form_ID 
-              WHERE Approval.P_Approval IS NOT NULL";
+   $query = "SELECT Student.Student_ID, Student.Student_Name, Form.Form_ID 
+          FROM Student 
+          INNER JOIN Form ON Student.Student_ID = Form.Student_ID 
+          INNER JOIN Approval ON Form.Form_ID = Approval.Form_ID 
+          WHERE Approval.P_Approval IS NOT NULL AND Approval.R_Approval IS NULL";
               
-    $result = mysqli_query($conn, $query);
+$result = mysqli_query($conn, $query);
+
 	
 	  echo "<p><a href='logout.php'>Log out</a></p>";
 
@@ -111,6 +112,7 @@ if (isset($_POST['approval'])) {
 
 if (mysqli_query($conn, $update_query)) {
     echo "Record inserted successfully";
+	header('Location: ' . $_SERVER['PHP_SELF']);
 } else {
     echo "Error inserting record: " . mysqli_error($conn);
 }
@@ -127,6 +129,7 @@ if (isset($_POST['disapproval'])) {
 
 if (mysqli_query($conn, $update_query)) {
     echo "Record inserted successfully";
+	header('Location: ' . $_SERVER['PHP_SELF']);
 } else {
     echo "Error inserting record: " . mysqli_error($conn);
 }

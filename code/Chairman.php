@@ -115,6 +115,7 @@ if (isset($_POST['approval'])) {
 	
 if (mysqli_query($conn, $update_query)) {
     echo "Record inserted successfully";
+	header('Location: ' . $_SERVER['PHP_SELF']);
 } else {
     echo "Error inserting record: " . mysqli_error($conn);
 }
@@ -136,6 +137,7 @@ if (isset($_POST['disapproval'])) {
     
 if (mysqli_query($conn, $insert_query)) {
     echo "Record inserted successfully";
+	header('Location: ' . $_SERVER['PHP_SELF']);
 } else {
     echo "Error inserting record: " . mysqli_error($conn);
 }
