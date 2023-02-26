@@ -16,8 +16,9 @@
     $department = $row['department'];
 
     // Get the student ID, name, and form ID from the Student and Form tables whose subject matches the chairman's department
-$query = "SELECT Student.Student_ID, Student.Student_Name, Form.Form_ID FROM Student INNER JOIN Form ON Student.Student_ID = Form.Student_ID WHERE Student.Subject = '$department'";
+ $query = "SELECT Student.Student_ID, Student.Student_Name, Form.Form_ID FROM Student INNER JOIN Form ON Student.Student_ID = Form.Student_ID INNER JOIN Approval ON Form.Form_ID = Approval.Form_ID WHERE Student.Subject = '$department' AND Approval.C_Approval IS NULL";
     $result = mysqli_query($conn, $query);
+	
 	echo "<p><a href='logout.php'>Log out</a></p>";
 
 
@@ -55,7 +56,8 @@ $query = "SELECT Student.Student_ID, Student.Student_Name, Form.Form_ID FROM Stu
         <td>Disapproval</td>
     </tr>
     <?php
-        while ($row = mysqli_fetch_assoc($result)) {
+        if (mysqli_num_rows($result) > 0) {
+		while ($row = mysqli_fetch_assoc($result)) {
     ?>
     <tr>
                                 <td><a href='details.php?student_id=<?php echo $row['Student_ID']?>'><?php echo $row['Student_ID']?></a></td>
@@ -78,10 +80,11 @@ $query = "SELECT Student.Student_ID, Student.Student_Name, Form.Form_ID FROM Stu
                                     </tr>
     <?php
         }
+		}else {
+        echo "No students found";
+    }
     ?>
 </table>
-
-
 
 
 
