@@ -10,13 +10,13 @@
     $email = $_SESSION['email'];
     $query = "SELECT Account_ID FROM Login WHERE Email = '$email'";
     $result = mysqli_query($conn, $query);
-    $row = mysqli_fetch_assoc($result);
-    $account_id = $row['Account_ID'];
+    $rowacc = mysqli_fetch_assoc($result);
+    $account_id = $rowacc['Account_ID'];
 
     // Get corresponding student ID from the Student table
     $query = "SELECT Student_ID FROM Student WHERE Account_ID = '$account_id'";
     $result = mysqli_query($conn, $query);
-    $row = mysqli_fetch_assoc($result);
+    $rowstu = mysqli_fetch_assoc($result);
     
     
 ?>
@@ -41,12 +41,12 @@
     <h1>Form Status</h1>
 
   <p><center>
-  <?php
+<?php
       
     // Check if student exists before retrieving the student_id
-    if ($row) {
+    if ($rowstu) {
 
-        $student_id = $row['Student_ID'];
+        $student_id = $rowstu['Student_ID'];
 
         // Get corresponding form ID from the Form table
         $query = "SELECT Form_ID FROM Form WHERE Student_ID = '$student_id'";
@@ -65,27 +65,27 @@
             // Display status based on form approval status
             if($row){
 
-            if(!($row['C_Approval'] == 'NO' || $row['P_Approval'] == 'NO' || $row['R_Approval'] == 'NO' || $row['AR_Approval'] == 'NO' || $row['AAA_Approval'] == 'NO') ) 
-            {
+                if(!($row['C_Approval'] == 'NO' || $row['P_Approval'] == 'NO' || $row['R_Approval'] == 'NO' || $row['AR_Approval'] == 'NO' || $row['AAA_Approval'] == 'NO') ) 
+                {
 
-                if($row['AAA_Approval'] != NULL){
-                    echo "Your Form Has Been Approved. <a href='generate_pdf.php?student_id=" . $student_id . "'target='_blank>Click here to download PDF</a>";
+                    if($row['AAA_Approval'] != NULL){
+                        echo "Your Form Has Been Approved. <a href='generate_pdf.php?student_id=" . $student_id . "'target='_blank>Click here to download PDF</a>";
+                    }
+                    else{
+                        echo "Pending";
+                    }
                 }
                 else{
-                    echo "Pending";
-                }
-             }
-             else{
-                echo "Your Form Has Been Disapproved";
+                    echo "Your Form Has Been Disapproved";
                 }
 
-      }
+            }
   
 
-}
+        }
   }
-  else{
-
+  else
+  {
     echo"Your Form Has Not Been Submitted";
 
 
@@ -93,7 +93,7 @@
 
   
   
-  ?>
+?>
   
   
   

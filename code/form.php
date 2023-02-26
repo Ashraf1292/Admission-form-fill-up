@@ -124,7 +124,17 @@ if ($conn->query($sql) === TRUE) {
 } else {
   echo "Error: " . $sql . "<br>" . $conn->error;
 }
-
+$query = "SELECT Form_ID FROM Form WHERE Student_ID = '$student_id'";
+$result = mysqli_query($conn, $query);
+$row = mysqli_fetch_assoc($result);
+$form_id = $row['Form_ID'];
+echo $form_id;
+$insert_query = "INSERT INTO Approval (Form_ID) VALUES ('$form_id')";
+if (mysqli_query($conn, $insert_query)) {
+  echo "Record inserted successfully";
+} else {
+  echo "Error inserting record: " . mysqli_error($conn);
+}
 if(isset($_POST['submit'])){
   $imagename = $_FILES['image']['name'];
   $tmpname   = $_FILES['image']['tmp_name'];

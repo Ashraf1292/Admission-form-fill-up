@@ -107,10 +107,10 @@ if (isset($_POST['approval'])) {
 	$officials_id_result = mysqli_query($conn, $officials_id_query);
 	$officials_id_row = mysqli_fetch_assoc($officials_id_result);
 	$officials_id = $officials_id_row['Officials_ID'];
-	$insert_query = "INSERT INTO Approval (Form_ID, C_Approval) VALUES ('$form_id', '$officials_id')";
+	$update_query = "UPDATE Approval SET C_Approval = '$officials_id' WHERE Form_ID = {$form_id}";
 	
 	
-if (mysqli_query($conn, $insert_query)) {
+if (mysqli_query($conn, $update_query)) {
     echo "Record inserted successfully";
 } else {
     echo "Error inserting record: " . mysqli_error($conn);
