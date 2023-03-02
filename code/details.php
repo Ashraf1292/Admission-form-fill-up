@@ -20,8 +20,6 @@
 
 
 
-// Display student image
-
 
 ?>
 
@@ -76,6 +74,10 @@
                                 <td><?php echo $row['Student_ID']?></td>
                             </tr>
                             <tr>
+                                <td>Student Image</td>
+                                <td> <img src="uploads/<?php echo $row['Image'];?>"style = "width: 100px ; height: 100px;"></td>
+                            </tr>
+                            <tr>
                                 <td>Student Name</td>
                                 <td><?php echo $row['Student_Name']?></td>
                             </tr>
@@ -95,6 +97,11 @@
                                 <td>Session</td>
                                 <td><?php echo $row['Session']?></td>
                             </tr>
+							 <tr>
+                                <td>Student Signature</td>
+                                <td> <img src="uploads/<?php echo $row['Sign'];?>"style = "width: 100px ; height: 100px;"></td>
+                            </tr>
+                           
                             <tr>
                             </table>
                                

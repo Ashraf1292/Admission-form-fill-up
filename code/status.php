@@ -69,7 +69,7 @@
                 {
 
                     if($row['AAA_Approval'] != NULL){
-                        echo "Your Form Has Been Approved. <a href='generate_pdf.php?student_id=" . $student_id . "'target='_blank>Click here to download PDF</a>";
+                        echo "Your Form Has Been Approved. <a href='generate_pdf.php?student_id=" . $student_id . "'target=''status.pdf'>Click here to download PDF</a>";
                     }
                     else{
                         echo "Pending";
@@ -101,6 +101,7 @@
   </center>
   </p>
 
+	<p><a href='status.php'>Click here to download PDF</a></p>
     <p><a href='logout2.php'>Log out</a></p>
 
 </body>

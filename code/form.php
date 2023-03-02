@@ -20,19 +20,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $mobile = $_POST["mobile"];
   $subject = $_POST["subject"];
   $session = $_POST["session"];
-  
-  $query = "SELECT Account_ID FROM LOGIN WHERE Email = '$email'";
-  $result = mysqli_query($conn, $query);
-  $row = mysqli_fetch_assoc($result);
-  $account_id = $row['Account_ID'];
+$student_image = $_FILES["student_image"]["name"]; // added line to get the uploaded student image file name
+$signature_image = $_FILES["signature"]["name"]; // added line to get the uploaded signature image file name
 
-  $sql = "INSERT INTO `student` (`Student_ID`, `Student_Name`, `Student_Email`, `Session`, `Subject`, `Date`, `Mobile`, `Account_ID`) VALUES (NULL, '$student_name', '$email', '$session', '$subject', current_timestamp(), '$mobile', '$account_id');";
+$query = "SELECT Account_ID FROM LOGIN WHERE Email = '$email'";
+$result = mysqli_query($conn, $query);
+$row = mysqli_fetch_assoc($result);
+$account_id = $row['Account_ID'];
 
+// added code to move uploaded files to the server and update the Image and Sign columns in the student table
+$target_dir = "uploads/"; // set the directory to save uploaded files
+$target_file_image = $target_dir . basename($_FILES["student_image"]["name"]); // get the file path of the uploaded student image
+$target_file_sign = $target_dir . basename($_FILES["signature"]["name"]); // get the file path of the uploaded signature image
+move_uploaded_file($_FILES["student_image"]["tmp_name"], $target_file_image); // move the uploaded student image to the server
+move_uploaded_file($_FILES["signature"]["tmp_name"], $target_file_sign); // move the uploaded signature image to the server
+
+$sql = "INSERT INTO `student` (`Student_ID`, `Student_Name`, `Student_Email`, `Session`, `Subject`, `Date`, `Mobile`, `Account_ID`, `Image`, `Sign`) VALUES (NULL, '$student_name', '$email', '$session', '$subject', current_timestamp(), '$mobile', '$account_id', '$student_image', '$signature_image');"; 
   if ($conn->query($sql) === TRUE) {
     echo "Student record created successfully<br>";
   } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
-  } 
+	  }
+	  
+	  
+	   
   $query = "SELECT Student_ID FROM STUDENT WHERE Student_Email = '$email'";
   $result = mysqli_query($conn, $query);
   $row = mysqli_fetch_assoc($result);
@@ -135,25 +146,6 @@ if (mysqli_query($conn, $insert_query)) {
 } else {
   echo "Error inserting record: " . mysqli_error($conn);
 }
-if(isset($_POST['submit'])){
-  $imagename = $_FILES['image']['name'];
-  $tmpname   = $_FILES['image']['tmp_name'];
-  $uploc     ='images/'.$imagename;  
-
-  $sql = "INSERT INTO Documents(Document_ID, Student_Image, Student_ID) VALUES (NULL, 'imagename', '$student_id')";
-
-  if(mysqli_query($conn, $sql) == TRUE){
-    move_uploaded_file($tmpname, $uploc);
-    echo "Data Inserted";
-  }else{
-    echo "Data Not Inserted";
-  }
-
-
-
-
-
-  }
 
 
 }
